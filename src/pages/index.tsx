@@ -1,5 +1,6 @@
 
 // Main file
+import { CompletedChallenges } from '../components/CompletedChallenges';
 import { ExperienceBar } from '../components/ExperienceBar';
 import { Profile } from '../components/Profile';
 import styled from '../styles/pages/Home.module.css';
@@ -12,6 +13,7 @@ export default function Home() {
 
         <div>
           <Profile />
+          <CompletedChallenges />
         </div>
 
         <div>
