@@ -19,6 +19,7 @@ interface ChallengeContextData { //Says the format that my context will follow
   activeChallenge: Challenge;
   levelUp: () => (void);
   startNewChallenge: () => (void);
+  resetChallenge: () => (void);
 }
 
 export const ChallengesContext = createContext({} as ChallengeContextData);
@@ -39,9 +40,22 @@ export const ChallengeProvider: React.FC<ChallengesProviderProps> = ({ children 
     setActiveChallenge(challenge);
   }
 
+  function resetChallenge() { //returns the status to the original value if the user clicks fail
+    setActiveChallenge(null);
+  }
+
 
   return (
-    <ChallengesContext.Provider value={{level, currentExperience, challengesCompleted, levelUp, startNewChallenge, activeChallenge }}>
+    <ChallengesContext.Provider value={{
+      level,
+      currentExperience,
+      challengesCompleted,
+      levelUp,
+      startNewChallenge,
+      activeChallenge,
+      resetChallenge
+
+    }}>
       {children}
     </ChallengesContext.Provider>
   )
