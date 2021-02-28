@@ -17,6 +17,7 @@ interface ChallengeContextData { //Says the format that my context will follow
   currentExperience: number;
   challengesCompleted: number;
   activeChallenge: Challenge;
+  experienceToNextLevel: number;
   levelUp: () => (void);
   startNewChallenge: () => (void);
   resetChallenge: () => (void);
@@ -29,6 +30,8 @@ export const ChallengeProvider: React.FC<ChallengesProviderProps> = ({ children 
   const [ currentExperience, setCurrentExperience ] = useState(0);
   const [ challengesCompleted, setChallengesCompleted ] = useState(0);
   const [ activeChallenge, setActiveChallenge ] = useState(null);
+
+  const experienceToNextLevel = Math.pow((level + 1) * 4, 2);
 
   function levelUp() {
     setLevel(level + 1);
@@ -53,7 +56,8 @@ export const ChallengeProvider: React.FC<ChallengesProviderProps> = ({ children 
       levelUp,
       startNewChallenge,
       activeChallenge,
-      resetChallenge
+      resetChallenge,
+      experienceToNextLevel
 
     }}>
       {children}
