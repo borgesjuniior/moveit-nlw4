@@ -3,7 +3,7 @@ import { ChallengesContext } from '../contexts/ChallengesContext';
 import styles from '../styles/components/ChallengeBox.module.css';
 
 export const ChallengesBox: React.FC = () => {
-  const { activeChallenge, resetChallenge }  = useContext(ChallengesContext);
+  const { activeChallenge, resetChallenge, completedChallenge }  = useContext(ChallengesContext);
 
   return (
     <div className={styles.challengeBoxContainer}>
@@ -19,7 +19,7 @@ export const ChallengesBox: React.FC = () => {
 
           <footer>
             <button type="button" className={styles.challengeFailedButton} onClick={resetChallenge}>Falhei</button>
-            <button type="button" className={styles.challengeSucceededButton}>Completei</button>
+            <button type="button" className={styles.challengeSucceededButton} onClick={completedChallenge}>Completei</button>
           </footer>
         </div>
       ) :(
