@@ -33,6 +33,7 @@ export const CountdownProvider: React.FC<CoundownContextProviderProps> = ({ chil
   function resetCoundown() {
     clearTimeout(countdownTimeout);
     setIsActive(false);
+    setHasFinished(false);
     setTime(0.1 * 60);
   }
 
