@@ -1,5 +1,5 @@
 
-import React, { useState, createContext, ReactNode } from 'react';
+import React, { useState, createContext, ReactNode, useEffect } from 'react';
 import challenges from '../../Challenges.json';
 
 interface ChallengesProviderProps { //
@@ -35,6 +35,10 @@ export const ChallengeProvider: React.FC<ChallengesProviderProps> = ({ children 
 
   const experienceToNextLevel = Math.pow((level + 1) * 4, 2);
 
+  useEffect(() => {
+    Notification.requestPermission();//Ask for user permission to show pop up
+  }, []) //[] Execute only one time when the component is showed on screen
+
   function levelUp() {
     setLevel(level + 1);
   }
@@ -43,6 +47,12 @@ export const ChallengeProvider: React.FC<ChallengesProviderProps> = ({ children 
     const randomChallengeIndex = Math.floor(Math.random() * challenges.length); // Create a random challenge
     const challenge = challenges[randomChallengeIndex];
     setActiveChallenge(challenge);
+
+    if (Notification.permission == 'granted') {
+      new Notification('Novo desafio😴', {
+        body: `Valendo ${challenge.amount}`
+      })
+    }
   }
 
   function resetChallenge() { //returns the status to the original value if the user clicks fail
