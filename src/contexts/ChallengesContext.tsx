@@ -48,6 +48,8 @@ export const ChallengeProvider: React.FC<ChallengesProviderProps> = ({ children 
     const challenge = challenges[randomChallengeIndex];
     setActiveChallenge(challenge);
 
+    new Audio('/notification.mp3').play(); //plays a audio when starts a new challenge
+
     if (Notification.permission == 'granted') {
       new Notification('Novo desafio😴', {
         body: `Valendo ${challenge.amount}`
