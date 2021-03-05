@@ -1,9 +1,13 @@
 
 import React, { useState, createContext, ReactNode, useEffect } from 'react';
+import Cookie from 'js-cookie';
 import challenges from '../../Challenges.json';
 
 interface ChallengesProviderProps { //
   children: ReactNode;
+  level: number;
+  currentExperience: number;
+  challengeCompleted: number;
 }
 
 interface Challenge {
@@ -27,10 +31,10 @@ interface ChallengeContextData { //Says the format that my context will follow
 
 export const ChallengesContext = createContext({} as ChallengeContextData);
 
-export const ChallengeProvider: React.FC<ChallengesProviderProps> = ({ children }) => {
-  const [ level, setLevel ] = useState(1);
-  const [ currentExperience, setCurrentExperience ] = useState(0);
-  const [ challengesCompleted, setChallengesCompleted ] = useState(0);
+export const ChallengeProvider: React.FC<ChallengesProviderProps> = ({ children, ...rest}) => {
+  const [ level, setLevel ] = useState(rest.level ?? 1); //If the rest.{props} does not exist in the cookie it assumes a default value
+  const [ currentExperience, setCurrentExperience ] = useState(rest.currentExperience ?? 0);
+  const [ challengesCompleted, setChallengesCompleted ] = useState(rest.challengeCompleted ?? 0);
   const [ activeChallenge, setActiveChallenge ] = useState(null);
 
   const experienceToNextLevel = Math.pow((level + 1) * 4, 2);
@@ -38,6 +42,13 @@ export const ChallengeProvider: React.FC<ChallengesProviderProps> = ({ children 
   useEffect(() => {
     Notification.requestPermission();//Ask for user permission to show pop up
   }, []) //[] Execute only one time when the component is showed on screen
+
+  useEffect(() => {
+    Cookie.set('level', level.toString());
+    Cookie.set('currentExperience', currentExperience.toString());
+    Cookie.set('challengesCompleted', challengesCompleted.toString());
+
+  }, [level, currentExperience, challengesCompleted]);
 
   function levelUp() {
     setLevel(level + 1);

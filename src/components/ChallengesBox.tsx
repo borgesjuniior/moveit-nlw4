@@ -38,7 +38,7 @@ export const ChallengesBox: React.FC = () => {
               Falhei</button>
 
             <button
-              type="button"
+              type="button" 
               className={styles.challengeSucceededButton}
               onClick={handleChallengeSucceeded}
             >
