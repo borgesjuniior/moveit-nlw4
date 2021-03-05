@@ -27,7 +27,7 @@ interface ChallengeContextData { //Says the format that my context will follow
   startNewChallenge: () => (void);
   resetChallenge: () => (void);
   completedChallenge: () => (void);
-
+  CloseLevelUpModal: () => (void)
 }
 
 export const ChallengesContext = createContext({} as ChallengeContextData);
@@ -55,6 +55,10 @@ export const ChallengeProvider: React.FC<ChallengesProviderProps> = ({ children,
   function levelUp() {
     setLevel(level + 1);
     setIsLevelModalOpen(true);
+  }
+
+  function CloseLevelUpModal() {
+    setIsLevelModalOpen(false);
   }
 
   function startNewChallenge() {
@@ -106,7 +110,8 @@ export const ChallengeProvider: React.FC<ChallengesProviderProps> = ({ children,
       activeChallenge,
       resetChallenge,
       experienceToNextLevel,
-      completedChallenge
+      completedChallenge,
+      CloseLevelUpModal
 
     }}>
       {children}

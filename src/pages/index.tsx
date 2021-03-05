@@ -52,13 +52,13 @@ export default function Home(props: HomeProps) {
 
 // This function is triggered before the page is loaded (backend next.js)
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { level, currentExperience, challengeCompleted} = context.req.cookies; //get cookies from page
+  const { level, currentExperience, challengesCompleted} = context.req.cookies; //get cookies from page
 
   return {
     props: {
       level: Number(level),
       currentExperience: Number(currentExperience),
-      challengeCompleted: Number(challengeCompleted)
+      challengesCompleted: Number(challengesCompleted)
     }
   }
 }
